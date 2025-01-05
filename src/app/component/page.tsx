@@ -3,8 +3,8 @@ import React from 'react';
 const Home = () => {
   return (
     <div>
-      <h1>Welcome to My Next.js App!</h1>
-      <p>This is myf custom homepage.</p>
+      <h1>This is component</h1>
+      <p>This is my custom homepage.</p>
     </div>
   );
 };

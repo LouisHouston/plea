@@ -1,26 +1,72 @@
-import React from 'react';
+"use client";
+
+import { useState } from 'react';
 
 const Register = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess(data.message);
+        setError('');
+      } else {
+        setError(data.error);
+        setSuccess('');
+      }
+    } catch (err) {
+      setError('Something went wrong.');
+      setSuccess('');
+    }
+  };
+
   return (
     <div>
-    <h2> REGISTER</h2>
-    <form action={""} method={"post"}>
-    <div>
-      <label> User Name: 
-      <input type="text"></input>
-      </label>
-      <label> Email: 
-      <input type="text"></input>
-      </label>
-      <label> Password:  
-      <input type="text"></input>
-      </label>
-      <button className="button-8" role="button">Submit</button>
-      </div>
+      <h1>Register</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          className="register"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="email"
+          className='register'
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          className="register"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" className='button-8'>Register</button>
       </form>
-      </div>
+      {success && <p style={{ color: 'green' }}>{success}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+    </div>
   );
 };
-
 
 export default Register;

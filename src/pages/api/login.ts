@@ -1,22 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { Client } from 'pg'; 
 import { NextApiRequest, NextApiResponse } from 'next';
 const mysql = require('mysql');
+import db from '@/lib/db';
 
-const db = new Client(process.env.DATABASE_URL);
-
-(async () => {
-  await db.connect();
-  try {
-    console.log("connected")
-  } catch (err) {
-    console.error("error executing query:", err);
-  }
-})();
-
-
-/*
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -41,4 +28,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-*/
+

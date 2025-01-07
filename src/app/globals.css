@@ -11,8 +11,19 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --input-background: #1a1a1a;
+    --input-foreground: #ededed; 
   }
 }
+
+input.register {
+  color: var(--input-foreground);
+  background: var(--input-background);
+  border: 1px solid #333;
+  margin: 5px;
+  border-radius: 8px; 
+}
+
 
 body {
   padding-top:30px;
@@ -62,3 +73,5 @@ body {
   box-shadow: none;
   color: #2c5777;
 }
+
+

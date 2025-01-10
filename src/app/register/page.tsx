@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from 'react';
+import Navbar from '../components/Navbar';
+
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -38,6 +40,7 @@ const Register = () => {
 
   return (
     <div>
+        <Navbar />
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <input

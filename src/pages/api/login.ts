@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { serialize } from 'cookie';
 import { NextApiRequest, NextApiResponse } from 'next';
 import db from '@/lib/db';
 
@@ -19,8 +20,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     const token = jwt.sign({ userId: user.id, userName: user.username }, process.env.JWT_SECRET , { expiresIn: '1h' });
     
-    res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=3600`);
-    res.status(200).json({ token });
+    res.setHeader(
+      'Set-Cookie',
+      serialize('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 3600,
+        path: '/',
+      })
+    );
+        res.status(200).json({ token });
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }

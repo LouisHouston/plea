@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
 
 
 const Login = () => {
@@ -39,7 +38,6 @@ const Login = () => {
 
     return (
       <div>
-        <Navbar />
         <form onSubmit={handleSubmit}>
           <input
             type="text"

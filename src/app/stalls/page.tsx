@@ -2,23 +2,23 @@
 
 import React from 'react';
 import { useState } from 'react';
+import CustomDropdown from '../components/dropdown';
 
-
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Stalls = () => {
+  const [stallName, setstallName] = useState('');
+  const [category, setCategory] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
   //NOTE: try to see if this is resuable for other forms or if it can be made into a custom hook
   const handleSubmit = async (e: React.FormEvent) => {
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/stalls', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ stallName,  }),
         credentials: 'include',
       });
 
@@ -39,29 +39,24 @@ const Login = () => {
 
 
     return (
+        <div>
       <div>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             className="register"
-            placeholder="Username"
-          value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Stall Name"
+          value={stallName}
+            onChange={(e) => setstallName(e.target.value)}
           />
-          <input
-            type="text"
-            className="register"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button className="button-8" type="submit">Submit</button>
-        </form>
+                   </form>
         {success && <p style={{ color: 'green' }}>{success}</p>}
         {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div>
+      <CustomDropdown></CustomDropdown>
+      <button className="button-8" type="submit">Submit</button>
       </div>
     );
   };
 
-
-  export default Login;
+export default Stalls;

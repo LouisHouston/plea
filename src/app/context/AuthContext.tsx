@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 type User = {
   id: string;
@@ -21,8 +22,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
-      const decodedUser: User = JSON.parse(atob(token.split(".")[1])); 
-      setUser(decodedUser);
+      try {
+        const decoded = jwt.decode(token) as User;
+        console.log("Decoded token:", decoded); // Debugging
+        setUser(decoded);
+      } catch (err) {
+        console.error("Failed to decode token:", err);
+        setUser(null);
+      }
     }
   }, []);
 

@@ -24,6 +24,62 @@ input.register {
   border-radius: 8px; 
 }
 
+input.stallregister {
+  color: var(--input-foreground);
+  background: var(--input-background);
+  user-select: all;
+  border: 1px solid #333;
+  margin: 5px;
+  border-radius: 8px; 
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 15rem;
+  user-select: none;
+  cursor: pointer;
+}
+
+.dropdown-header {
+  padding: 5% 1rem;
+  background-color: var(--select-bg, #171717);
+  color: var(--select-text, #ffffff);
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-arrow {
+  margin-left: 0.5rem;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--option-bg, #f0f0f0);
+  border-radius: 0.05em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+  margin-top: 0.25rem;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+  background-color: var(--option-bg, #171717);
+  color: var(--option-text, #ffffff);
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: var(--option-hover-bg, #ddd);
+  color: var(--option-hover-text, #ffffff);
+}
 
 body {
   padding-top:30px;
